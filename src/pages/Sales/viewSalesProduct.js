@@ -13,9 +13,7 @@ function ViewSaleProduct({ products }) {
   const headCells = [
     { id: "name", label: "Name" },
     { id: "quantity", label: "Quantity" },
-    { id: "single price", label: "Single Price" },
-    { id: "Total price", label: "Total Price" },
-    { id: "Balance", label: "Balance" },
+    { id: "price", label: "Price" },
     { id: "image", label: "Image" },
     { id: "date", label: "Date" },
     { id: "month", label: "Mont" },
@@ -98,9 +96,6 @@ function ViewSaleProduct({ products }) {
                 <TableCell>{item.product.name}</TableCell>
                 <TableCell>{item.quantity}</TableCell>
                 <TableCell>{item.price}</TableCell>
-                <TableCell>{item.price * item.quantity}</TableCell>
-                <TableCell>{item.product.quantity}</TableCell>
-
                 {item.product.ProductImages.map((item) => (
                   <TableCell>
                     <Avatar

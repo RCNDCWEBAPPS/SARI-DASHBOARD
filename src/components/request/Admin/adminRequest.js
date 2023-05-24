@@ -1,13 +1,13 @@
-import  { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 //import { API } from "../config";
 //import { getCookie, userSessionExpired } from "./auth";
-import {  userSessionExpired } from "../auth";
+import { userSessionExpired } from "../auth";
 //import { url } from '../../../../utiles/config'
-import {url} from '../../../utiles/config'
+import { url } from '../../../utiles/config'
 import fetch from "isomorphic-fetch";
 const AdminApiRequests = () => {
-      let token = localStorage.getItem('token')
+  let token = localStorage.getItem('token')
   const navigate = useHistory();
   const addSales = (sales) => {
     return fetch(`${url}/admin-register-user`, {
@@ -15,7 +15,7 @@ const AdminApiRequests = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(sales),
     })
@@ -30,7 +30,7 @@ const AdminApiRequests = () => {
       method: "GET",
       headers: {
         Accept: "application/json",
-     Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     })
@@ -61,7 +61,7 @@ const AdminApiRequests = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-       Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -73,10 +73,10 @@ const AdminApiRequests = () => {
   };
   return {
     addSales,
-      updateSales,
+    updateSales,
     viewAllSales,
     deleteSales,
-  
+
   };
 };
 

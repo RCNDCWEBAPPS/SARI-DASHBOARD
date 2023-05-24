@@ -32,19 +32,24 @@ export default function ProductDetalis({
   const [quantity, setQuantity] = useState()
   const formData = new FormData();
   const [description, setDescriepiton] = useState('')
-  const [price, setPrice] = useState('')
-
+  const [price, setPrice] = useState()
+  const [date, setDate] = useState('')
   const [open, setOpen] = useState(false)
   const handleChange = (e) => {
 
     setQuantity(e.target.value)
-    
+
 
   }
-  const PriceChange = (e) =>{
+  const PriceChange = (e) => {
     setPrice(e.target.value)
   }
-  
+
+  const DateChange = (e) => {
+    console.log(e.target.value)
+    setDate(e.target.value)
+  }
+
   const handleDescriptionChange = (e) => {
     setDescriepiton(e.target.value)
 
@@ -57,8 +62,9 @@ export default function ProductDetalis({
   let orginalQuantity = parseInt(product.quantity)
   const sendRequest = async () => {
     formData.append("description", description);
-    formData.append("quantity", quantity)
-    formData.append("price", price)
+    formData.append("quantity", quantity);
+    formData.append("price", price);
+    formData.append("date", date)
 
     if (quantity > orginalQuantity) {
       setOpen(true)
@@ -88,13 +94,14 @@ export default function ProductDetalis({
   }
   const removeProduct = (data, quantity) => {
     let id = product.id;
-    console.log(description)
     let token = localStorage.getItem("token");
     axios.post(`${url}/${quantity}/sales-removeProduct/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      description: description
+      description: description,
+      date:date,
+      price:price
     },
     ).then((response) => {
       console.log(response)
@@ -175,7 +182,7 @@ export default function ProductDetalis({
             m: 1,
             bgcolor: "background.paper",
             borderRadius: 1,
-            justifyContent: "space-between",
+            gap:"60px"
           }}
         >
           <Controls.Input
@@ -190,16 +197,18 @@ export default function ProductDetalis({
             value={quantity}
             onChange={handleChange}
           />
-          <span>Total Price:{quantity ? totalPrice() : 0}</span>
-          <Controls.Button
-            text="Updat"
-            variant="outlined"
-            startIcon={<EditIcon />}
-            color="secondary"
-            onClick={sendRequest}
-          />{" "}
         </Box>
-        <div style={{ marginLeft: "15px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            p: 1,
+            m: 1,
+            bgcolor: "background.paper",
+            borderRadius: 1,
+            gap: "60px"
+          }}
+        >
           <Controls.Input
             multiline
             maxRows={4}
@@ -208,7 +217,35 @@ export default function ProductDetalis({
             label="Description"
             rows={3}
           />
-        </div>
+          <Controls.Input
+            label="Date"
+            type="date"
+            value={date}
+            onChange={DateChange}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            p: 1,
+            m: 1,
+            bgcolor: "background.paper",
+            borderRadius: 1,
+            gap:"60px"
+
+          }}
+        >
+          <span>Total Price:{quantity ? totalPrice() : 0}</span>
+          <Controls.Button
+           
+            text="Update"
+            // variant="outlined"
+            startIcon={<EditIcon />}
+            color="secondary"
+            onClick={sendRequest}
+          />
+        </Box>
       </div>
     </div>
   );

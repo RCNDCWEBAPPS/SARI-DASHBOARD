@@ -15,6 +15,8 @@ import {SalesProductPageConfig} from '../pages/Sales/productPage'
 import {HomePageCofig} from '../pages/Sales/HomePageConfig'
 import {ProductReoprtPageConfig} from '../pages/Admin/ManagePoducts/ProductReportPageConfig'
 import {SalesProductReoprtPageConfig} from '../pages/Admin/ManagePoducts/SalesProductReportPageConfig'
+import {Export} from '../pages/Admin/ManagePoducts/SalesProductReportPageConfig'
+
 const routeConfigs = [
   ...SalesProductReoprtPageConfig.routes,
   ...ProductReoprtPageConfig.routes,
